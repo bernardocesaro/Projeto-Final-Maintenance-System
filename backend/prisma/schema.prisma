@@ -1,0 +1,286 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ==============================
+// Enums
+// ==============================
+
+// ==============================
+// Enums Tabela User
+// ==============================
+
+enum RoleUser {
+  Admin    @map("admin")
+  Operator @map("operator")
+}
+
+enum StatusUser {
+  Active   @map("active")
+  Inactive @map("inactive")
+  Blocked  @map("blocked")
+}
+
+// ==============================
+// Enums Tabela Equipment
+// ==============================
+
+enum StatusEquipment {
+  Active        @map("active")
+  InMaintenance @map("in_maintenance")
+  Inactive      @map("inactive")
+}
+
+// ==============================
+// Enums Tabela Technician
+// ==============================
+
+enum SpecialtyTechnician {
+  Electrical @map("electrical")
+  Mechanical @map("mechanical")
+  Hydraulic  @map("hydraulic")
+  Other      @map("other")
+}
+
+enum StatusTechnician {
+  Active    @map("active")
+  InService @map("in_service")
+  Inactive  @map("inactive")
+}
+
+// ==============================
+// Enums Tabela ServiceOrder
+// ==============================
+
+enum PriorityServiceOrder {
+  Critic @map("critic")
+  High   @map("high")
+  Medium @map("medium")
+  Low    @map("low")
+}
+
+enum StatusServiceOrder {
+  Opened     @map("opened")
+  InProgress @map("in_progress")
+  Waiting    @map("waiting")
+  Finished   @map("finished")
+  Canceled   @map("canceled")
+}
+
+// ==============================
+// Enums Tabelas de Logs
+// ==============================
+
+enum ActionLogTable {
+  Insert @map("insert")
+  Update @map("update")
+  Delete @map("delete")
+}
+
+// ==============================
+// Tabelas
+// ==============================
+
+// ==============================
+// Tabela User
+// ==============================
+
+model User {
+  id          Int        @id @default(autoincrement())
+  firebaseUid String     @unique
+  name        String
+  email       String     @unique
+  role        RoleUser
+  status      StatusUser @default(Active)
+  lastAccess  DateTime   @default(now())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+// ==============================
+// Tabela Category
+// ==============================
+
+model Category {
+  id          Int         @id @default(autoincrement())
+  name        String      @unique
+  description String?
+  equipments  Equipment[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+// ==============================
+// Tabela Local
+// ==============================
+
+model Local {
+  id           Int         @id @default(autoincrement())
+  name         String      @unique
+  description  String?
+  cep          String?
+  street       String?
+  number       String?
+  complement   String?
+  neighborhood String?
+  city         String?
+  state        String?
+  equipments   Equipment[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+// ==============================
+// Tabela Equipment
+// ==============================
+
+model Equipment {
+  id              Int             @id @default(autoincrement())
+  serviceOrders   ServiceOrder[]
+  name            String
+  patrimony       String          @unique
+  category        Category        @relation(fields: [categoryId], references: [id])
+  categoryId      Int
+  local           Local           @relation(fields: [localId], references: [id])
+  localId         Int
+  acquisitionDate DateTime?
+  status          StatusEquipment @default(Active)
+  image           String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+// ==============================
+// Tabela Technician
+// ==============================
+
+model Technician {
+  id            Int                 @id @default(autoincrement())
+  serviceOrders ServiceOrder[]
+  name          String
+  cellphone     String              @unique
+  email         String              @unique
+  specialty     SpecialtyTechnician
+  status        StatusTechnician    @default(Active)
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+}
+
+// ==============================
+// Tabela ServiceOrder
+// ==============================
+
+model ServiceOrder {
+  id           Int                  @id @default(autoincrement())
+  equipment    Equipment            @relation(fields: [equipmentId], references: [id])
+  equipmentId  Int
+  technician   Technician           @relation(fields: [technicianId], references: [id])
+  technicianId Int
+  description  String
+  priority     PriorityServiceOrder
+  date         DateTime
+  status       StatusServiceOrder   @default(Opened)
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+}
+
+// ==============================
+// Tabela LogUser
+// ==============================
+
+model LogUser {
+  id            Int            @id @default(autoincrement())
+  userId        Int
+  performedById Int?
+  action        ActionLogTable
+  message       String
+  createdAt     DateTime       @default(now())
+
+  @@index([userId])
+}
+
+// ==============================
+// Tabela LogCategory
+// ==============================
+
+model LogCategory {
+  id            Int            @id @default(autoincrement())
+  categoryId    Int
+  performedById Int?
+  action        ActionLogTable
+  message       String
+  createdAt     DateTime       @default(now())
+
+  @@index([categoryId])
+}
+
+// ==============================
+// Tabela LogLocal
+// ==============================
+
+model LogLocal {
+  id            Int            @id @default(autoincrement())
+  localId       Int
+  performedById Int?
+  action        ActionLogTable
+  message       String
+  createdAt     DateTime       @default(now())
+
+  @@index([localId])
+}
+
+// ==============================
+// Tabela LogEquipment
+// ==============================
+
+model LogEquipment {
+  id            Int            @id @default(autoincrement())
+  equipmentId   Int
+  performedById Int?
+  action        ActionLogTable
+  message       String
+  createdAt     DateTime       @default(now())
+
+  @@index([equipmentId])
+}
+
+// ==============================
+// Tabela LogTechnician
+// ==============================
+
+model LogTechnician {
+  id            Int            @id @default(autoincrement())
+  technicianId  Int
+  performedById Int?
+  action        ActionLogTable
+  message       String
+  createdAt     DateTime       @default(now())
+
+  @@index([technicianId])
+}
+
+// ==============================
+// Tabela LogServiceOrder
+// ==============================
+
+model LogServiceOrder {
+  id             Int            @id @default(autoincrement())
+  serviceOrderId Int
+  performedById  Int?
+  action         ActionLogTable
+  message        String
+  createdAt      DateTime       @default(now())
+
+  @@index([serviceOrderId])
+}
