@@ -1,11 +1,17 @@
-const { initializeApp, applicationDefault, getApps } = require("firebase-admin/app");
+const {
+    initializeApp,
+    applicationDefault,
+    getApps,
+} = require("firebase-admin/app");
 
-const { getAuth } = require("firebase-admin/auth");
+const {
+    getAuth,
+} = require("firebase-admin/auth");
 
 const firebaseApp = getApps().length
     ? getApps()[0]
     : initializeApp({
-        credential: applicationDefault()
+        credential: applicationDefault(),
     });
 
 const firebaseAdminAuth = getAuth(firebaseApp);
