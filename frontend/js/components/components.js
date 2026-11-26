@@ -17,5 +17,7 @@ async function loadComponent(elementId, filePath) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadComponent('footer-placeholder', './footer.html');
+    loadComponent('footerPlaceholder', '../../pages/components/footerComponent.html');
+    loadComponent('menuPlaceholder', '../../pages/components/menuComponent.html');
+    loadComponent('searchPlaceholder', '../../pages/components/searchComponent.html');
 });

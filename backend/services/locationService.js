@@ -1,24 +1,24 @@
 const prisma = require("../database/prisma");
 
-async function getAllLocals() {
-    return await prisma.local.findMany({
+async function getAllLocations() {
+    return await prisma.location.findMany({
         orderBy: {
             id: "desc",
         },
     });
 };
 
-async function getLocalById(id) {
-    return await prisma.local.findUnique({
+async function getLocationById(id) {
+    return await prisma.location.findUnique({
         where: {
             id: Number(id),
         },
     });
 };
 
-async function createLocal(data, performedById = null) {
+async function createLocation(data, performedById = null) {
     return await prisma.$transaction(async (transaction) => {
-        const local = await transaction.local.create({
+        const location = await transaction.location.create({
             data: {
                 name: data.name,
                 description: data.description ?? null,
@@ -32,22 +32,22 @@ async function createLocal(data, performedById = null) {
             },
         });
 
-        await transaction.logLocal.create({
+        await transaction.logLocation.create({
             data: {
-                localId: local.id,
+                locationId: location.id,
                 performedById: performedById,
                 action: "Insert",
-                message: `Local ${local.name} criado.`,
+                message: `Location ${location.name} criado.`,
             },
         });
 
-        return local;
+        return location;
     });
 };
 
-async function updateLocal(id, data, performedById = null) {
+async function updateLocation(id, data, performedById = null) {
     return await prisma.$transaction(async (transaction) => {
-        const local = await transaction.local.update({
+        const location = await transaction.location.update({
             where: {
                 id: Number(id),
             },
@@ -64,44 +64,44 @@ async function updateLocal(id, data, performedById = null) {
             },
         });
 
-        await transaction.logLocal.create({
+        await transaction.logLocation.create({
             data: {
-                localId: local.id,
+                locationId: location.id,
                 performedById: performedById,
                 action: "Update",
-                message: `Local ${local.name} atualizado.`,
+                message: `Location ${location.name} atualizado.`,
             },
         });
 
-        return local;
+        return location;
     });
 };
 
-async function deleteLocal(id, performedById = null) {
+async function deleteLocation(id, performedById = null) {
     return await prisma.$transaction(async (transaction) => {
-        const local = await transaction.local.delete({
+        const location = await transaction.location.delete({
             where: {
                 id: Number(id),
             },
         });
 
-        await transaction.logLocal.create({
+        await transaction.logLocation.create({
             data: {
-                localId: local.id,
+                locationId: location.id,
                 performedById: performedById,
                 action: "Delete",
-                message: `Local ${local.name} excluído.`,
+                message: `Location ${location.name} excluído.`,
             },
         });
 
-        return local;
+        return location;
     });
 };
 
 module.exports = {
-    getAllLocals,
-    getLocalById,
-    createLocal,
-    updateLocal,
-    deleteLocal,
+    getAllLocations,
+    getLocationById,
+    createLocation,
+    updateLocation,
+    deleteLocation,
 }

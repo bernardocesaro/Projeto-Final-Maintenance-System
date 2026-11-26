@@ -122,10 +122,10 @@ model Category {
 }
 
 // ==============================
-// Tabela Local
+// Tabela Location
 // ==============================
 
-model Local {
+model Location {
   id           Int         @id @default(autoincrement())
   name         String      @unique
   description  String?
@@ -152,8 +152,8 @@ model Equipment {
   patrimony       String          @unique
   category        Category        @relation(fields: [categoryId], references: [id])
   categoryId      Int
-  local           Local           @relation(fields: [localId], references: [id])
-  localId         Int
+  location        Location           @relation(fields: [locationId], references: [id])
+  locationId      Int
   acquisitionDate DateTime?
   status          StatusEquipment @default(Active)
   image           String?
@@ -226,18 +226,18 @@ model LogCategory {
 }
 
 // ==============================
-// Tabela LogLocal
+// Tabela LogLocation
 // ==============================
 
-model LogLocal {
+model LogLocation {
   id            Int            @id @default(autoincrement())
-  localId       Int
+  locationId    Int
   performedById Int?
   action        ActionLogTable
   message       String
   createdAt     DateTime       @default(now())
 
-  @@index([localId])
+  @@index([locationId])
 }
 
 // ==============================
