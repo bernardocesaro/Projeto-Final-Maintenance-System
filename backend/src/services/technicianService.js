@@ -1,4 +1,6 @@
-const prisma = require("../database/prisma");
+const {
+    prisma,
+} = require("../database/prisma");
 
 async function getAllTechnicians() {
     return await prisma.technician.findMany({
@@ -99,4 +101,4 @@ module.exports = {
     createTechnician,
     updateTechnician,
     deleteTechnician,
-}
+};

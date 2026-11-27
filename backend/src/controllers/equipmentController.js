@@ -1,4 +1,6 @@
-const equipmentService = require("../services/equipmentService");
+const {
+    equipmentService,
+ } = require("../services/equipmentService");
 
 async function getAllEquipments(req, res) {
     try {
@@ -12,10 +14,10 @@ async function getAllEquipments(req, res) {
     } catch (error) {
         console.error("Erro ao buscar os equipamentos: ", error);
         res.status(500).json({
-            message: "Erro ao buscar os equipamentos!"
+            message: "Erro ao buscar os equipamentos!",
         });
     }
-}
+};
 
 async function getEquipmentById(req, res) {
     try {
@@ -23,7 +25,7 @@ async function getEquipmentById(req, res) {
         if (!equipment) {
             console.warn("Nenhum equipmento encontrado: ", req.params.id);
             return res.status(404).json({
-                message: "Nenhum equipmento encontrado!"
+                message: "Nenhum equipmento encontrado!",
             });
         }
         console.info("Sucesso ao buscar o equipmento!");
@@ -35,10 +37,10 @@ async function getEquipmentById(req, res) {
     } catch (error) {
         console.error("Erro ao buscar o equipmento: ", error);
         res.status(500).json({
-            message: "Erro ao buscar o equipmento!"
+            message: "Erro ao buscar o equipmento!",
         });
     }
-}
+};
 
 async function createEquipment(req, res) {
     try {
@@ -51,7 +53,7 @@ async function createEquipment(req, res) {
     } catch (error) {
         console.error("Erro ao cadastrar o equipmento: ", error);
         res.status(500).json({
-            message: "Erro ao cadastrar o equipmento!"
+            message: "Erro ao cadastrar o equipmento!",
         });
     }
 };
@@ -67,10 +69,10 @@ async function updateEquipment(req, res) {
     } catch (error) {
         console.error("Erro ao atualizar o equipmento: ", error);
         res.status(500).json({
-            message: "Erro ao atualizar o equipmento!"
+            message: "Erro ao atualizar o equipmento!",
         });
     }
-}
+};
 
 async function deleteEquipment(req, res) {
     try {
@@ -83,7 +85,7 @@ async function deleteEquipment(req, res) {
     } catch (error) {
         console.error("Erro ao excluir o equipmento: ", error);
         res.status(500).json({
-            message: "Erro ao excluir o equipmento!"
+            message: "Erro ao excluir o equipmento!",
         });
     }
 }

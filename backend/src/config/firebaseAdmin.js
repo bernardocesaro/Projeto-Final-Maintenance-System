@@ -16,4 +16,6 @@ const firebaseApp = getApps().length
 
 const firebaseAdminAuth = getAuth(firebaseApp);
 
-module.exports = (firebaseAdminAuth);
+module.exports = {
+    firebaseAdminAuth,
+};

@@ -1,4 +1,6 @@
-const serviceOrderService = require("../services/serviceOrderService");
+const {
+    serviceOrderService,
+ } = require("../services/serviceOrderService");
 
 async function getAllServiceOrders(req, res) {
     try {
@@ -12,10 +14,10 @@ async function getAllServiceOrders(req, res) {
     } catch (error) {
         console.error("Erro ao buscar as ordens de serviço: ", error);
         res.status(500).json({
-            message: "Erro ao buscar as ordens de serviço!"
+            message: "Erro ao buscar as ordens de serviço!",
         });
     }
-}
+};
 
 async function getServiceOrderById(req, res) {
     try {
@@ -23,7 +25,7 @@ async function getServiceOrderById(req, res) {
         if (!serviceOrder) {
             console.warn("Nenhuma ordem de serviço encontrada: ", req.params.id);
             return res.status(404).json({
-                message: "Nenhuma ordem de serviço encontrada!"
+                message: "Nenhuma ordem de serviço encontrada!",
             });
         }
         console.info("Sucesso ao buscar a ordem de serviço!");
@@ -35,10 +37,10 @@ async function getServiceOrderById(req, res) {
     } catch (error) {
         console.error("Erro ao buscar a ordem de serviço: ", error);
         res.status(500).json({
-            message: "Erro ao buscar a ordem de serviço!"
+            message: "Erro ao buscar a ordem de serviço!",
         });
     }
-}
+};
 
 async function createServiceOrder(req, res) {
     try {
@@ -51,7 +53,7 @@ async function createServiceOrder(req, res) {
     } catch (error) {
         console.error("Erro ao cadastrar a ordem de serviço: ", error);
         res.status(500).json({
-            message: "Erro ao cadastrar a ordem de serviço!"
+            message: "Erro ao cadastrar a ordem de serviço!",
         });
     }
 };
@@ -67,10 +69,10 @@ async function updateServiceOrder(req, res) {
     } catch (error) {
         console.error("Erro ao atualizar a ordem de serviço: ", error);
         res.status(500).json({
-            message: "Erro ao atualizar a ordem de serviço!"
+            message: "Erro ao atualizar a ordem de serviço!",
         });
     }
-}
+};
 
 async function deleteServiceOrder(req, res) {
     try {
@@ -83,10 +85,10 @@ async function deleteServiceOrder(req, res) {
     } catch (error) {
         console.error("Erro ao excluir a ordem de serviço: ", error);
         res.status(500).json({
-            message: "Erro ao excluir a ordem de serviço!"
+            message: "Erro ao excluir a ordem de serviço!",
         });
     }
-}
+};
 
 module.exports = {
     getAllServiceOrders,

@@ -1,6 +1,8 @@
-const prisma = require("../database/prisma");
+const {
+    prisma,
+} = require("../database/prisma");
 
-async function getAllCategorys() {
+async function getAllCategories() {
     return await prisma.category.findMany({
         orderBy: {
             id: "desc",
@@ -85,9 +87,9 @@ async function deleteCategory(id, performedById = null) {
 };
 
 module.exports = {
-    getAllCategorys,
+    getAllCategories,
     getCategoryById,
     createCategory,
     updateCategory,
     deleteCategory,
-}
+};

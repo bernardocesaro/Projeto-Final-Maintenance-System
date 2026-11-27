@@ -1,4 +1,6 @@
-const categoryService = require("../services/categoryService");
+const {
+    categoryService,
+} = require("../services/categoryService");
 
 async function getAllCategories(req, res) {
     try {
@@ -89,7 +91,7 @@ async function deleteCategory(req, res) {
 };
 
 module.exports = {
-    getAllCategorys,
+    getAllCategories,
     getCategoryById,
     createCategory,
     updateCategory,

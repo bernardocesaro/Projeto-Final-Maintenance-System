@@ -1,4 +1,6 @@
-const prisma = require("../database/prisma");
+const {
+    prisma,
+} = require("../database/prisma");
 
 async function getAllLocations() {
     return await prisma.location.findMany({
@@ -104,4 +106,4 @@ module.exports = {
     createLocation,
     updateLocation,
     deleteLocation,
-}
+};

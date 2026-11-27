@@ -1,4 +1,6 @@
-const technicianService = require("../services/technicianService");
+const {
+    technicianService,
+} = require("../services/technicianService");
 
 async function getAllTechnicians(req, res) {
     try {
@@ -12,10 +14,10 @@ async function getAllTechnicians(req, res) {
     } catch (error) {
         console.error("Erro ao buscar os técnicos: ", error);
         res.status(500).json({
-            message: "Erro ao buscar os técnicos!"
+            message: "Erro ao buscar os técnicos!",
         });
     }
-}
+};
 
 async function getTechnicianById(req, res) {
     try {
@@ -23,7 +25,7 @@ async function getTechnicianById(req, res) {
         if (!technician) {
             console.warn("Nenhum técnico encontrado: ", req.params.id);
             return res.status(404).json({
-                message: "Nenhum técnico encontrado!"
+                message: "Nenhum técnico encontrado!",
             });
         }
         console.info("Sucesso ao buscar o técnico!");
@@ -35,10 +37,10 @@ async function getTechnicianById(req, res) {
     } catch (error) {
         console.error("Erro ao buscar o técnico: ", error);
         res.status(500).json({
-            message: "Erro ao buscar o técnico!"
+            message: "Erro ao buscar o técnico!",
         });
     }
-}
+};
 
 async function createTechnician(req, res) {
     try {
@@ -51,7 +53,7 @@ async function createTechnician(req, res) {
     } catch (error) {
         console.error("Erro ao cadastrar o técnico: ", error);
         res.status(500).json({
-            message: "Erro ao cadastrar o técnico!"
+            message: "Erro ao cadastrar o técnico!",
         });
     }
 };
@@ -67,10 +69,10 @@ async function updateTechnician(req, res) {
     } catch (error) {
         console.error("Erro ao atualizar o técnico: ", error);
         res.status(500).json({
-            message: "Erro ao atualizar o técnico!"
+            message: "Erro ao atualizar o técnico!",
         });
     }
-}
+};
 
 async function deleteTechnician(req, res) {
     try {
@@ -83,10 +85,10 @@ async function deleteTechnician(req, res) {
     } catch (error) {
         console.error("Erro ao excluir o técnico: ", error);
         res.status(500).json({
-            message: "Erro ao excluir o técnico!"
+            message: "Erro ao excluir o técnico!",
         });
     }
-}
+};
 
 module.exports = {
     getAllTechnicians,

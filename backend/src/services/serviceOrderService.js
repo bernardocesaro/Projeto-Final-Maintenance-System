@@ -1,4 +1,6 @@
-const prisma = require("../database/prisma");
+const {
+    prisma,
+} = require("../database/prisma");
 
 async function getAllServiceOrders() {
     return await prisma.serviceOrder.findMany({
@@ -109,4 +111,4 @@ module.exports = {
     createServiceOrder,
     updateServiceOrder,
     deleteServiceOrder,
-}
+};

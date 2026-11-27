@@ -1,12 +1,12 @@
 const express = require("express");
 const cors    = require("cors");
 
-const categoryRoutes = require("./routes/categoryRoute");
-const localRoutes = require("./routes/localRoute");
-const equipmentRoutes = require("./routes/equipmentRoute");
-const technicianRoutes = require("./routes/technicianRoute");
+const categoryRoutes     = require("./routes/categoryRoute");
+const localRoutes        = require("./routes/localRoute");
+const equipmentRoutes    = require("./routes/equipmentRoute");
+const technicianRoutes   = require("./routes/technicianRoute");
 const serviceOrderRoutes = require("./routes/serviceOrderRoute");
-const userRoutes = require("./routes/userRoute");
+const userRoutes         = require("./routes/userRoute");
 
 const app = express();
 
@@ -22,17 +22,19 @@ app.use("/health", (req, res) => {
     });
 });
 
-app.use("/categories", categoryRoutes);
-app.use("/locals", localRoutes);
-app.use("/equipments", equipmentRoutes);
-app.use("/technicians", technicianRoutes);
+app.use("/categories"    , categoryRoutes);
+app.use("/locals"        , localRoutes);
+app.use("/equipments"    , equipmentRoutes);
+app.use("/technicians"   , technicianRoutes);
 app.use("/service-orders", serviceOrderRoutes);
-app.use("/users", userRoutes);
+app.use("/users"         , userRoutes);
 app.use((req, res) => {
     console.warn(`Rota não encontrada: ${req.method} ${req.originalUrl}`);
     res.status(404).json({
-        message: "Rota não encontrada!"
+        message: "Rota não encontrada!",
     });
 });
 
-module.exports = app;
+module.exports = {
+    app,
+};

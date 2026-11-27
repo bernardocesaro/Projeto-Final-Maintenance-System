@@ -1,4 +1,6 @@
-const locationService = require("../services/locationService");
+const {
+    locationService,
+ } = require("../services/locationService");
 
 async function getAllLocations(req, res) {
     try {
@@ -12,10 +14,10 @@ async function getAllLocations(req, res) {
     } catch (error) {
         console.error("Erro ao buscar os locais: ", error);
         res.status(500).json({
-            message: "Erro ao buscar os locais!"
+            message: "Erro ao buscar os locais!",
         });
     }
-}
+};
 
 async function getLocationById(req, res) {
     try {
@@ -23,7 +25,7 @@ async function getLocationById(req, res) {
         if (!location) {
             console.warn("Nenhum location encontrado: ", req.params.id);
             return res.status(404).json({
-                message: "Nenhum location encontrado!"
+                message: "Nenhum location encontrado!",
             });
         }
         console.info("Sucesso ao buscar o location!");
@@ -35,10 +37,10 @@ async function getLocationById(req, res) {
     } catch (error) {
         console.error("Erro ao buscar o location: ", error);
         res.status(500).json({
-            message: "Erro ao buscar o location!"
+            message: "Erro ao buscar o location!",
         });
     }
-}
+};
 
 async function createLocation(req, res) {
     try {
@@ -51,7 +53,7 @@ async function createLocation(req, res) {
     } catch (error) {
         console.error("Erro ao cadastrar o location: ", error);
         res.status(500).json({
-            message: "Erro ao cadastrar o location!"
+            message: "Erro ao cadastrar o location!",
         });
     }
 };
@@ -67,10 +69,10 @@ async function updateLocation(req, res) {
     } catch (error) {
         console.error("Erro ao atualizar o location: ", error);
         res.status(500).json({
-            message: "Erro ao atualizar o location!"
+            message: "Erro ao atualizar o location!",
         });
     }
-}
+};
 
 async function deleteLocation(req, res) {
     try {
@@ -83,10 +85,10 @@ async function deleteLocation(req, res) {
     } catch (error) {
         console.error("Erro ao excluir o location: ", error);
         res.status(500).json({
-            message: "Erro ao excluir o location!"
+            message: "Erro ao excluir o location!",
         });
     }
-}
+};
 
 module.exports = {
     getAllLocations,

@@ -1,4 +1,6 @@
-const userService = require("../services/userService");
+const {
+    userService,
+} = require("../services/userService");
 
 async function getAllUsers(req, res) {
     try {
@@ -12,10 +14,10 @@ async function getAllUsers(req, res) {
     } catch (error) {
         console.error("Erro ao buscar os usuários: ", error);
         res.status(500).json({
-            message: "Erro ao buscar os usuários!"
+            message: "Erro ao buscar os usuários!",
         });
     }
-}
+};
 
 async function getUserById(req, res) {
     try {
@@ -23,7 +25,7 @@ async function getUserById(req, res) {
         if (!user) {
             console.warn("Nenhum usuário encontrado: ", req.params.id);
             return res.status(404).json({
-                message: "Nenhum usuário encontrado!"
+                message: "Nenhum usuário encontrado!",
             });
         }
         console.info("Sucesso ao buscar o usuário!");
@@ -35,10 +37,10 @@ async function getUserById(req, res) {
     } catch (error) {
         console.error("Erro ao buscar o usuário: ", error);
         res.status(500).json({
-            message: "Erro ao buscar o usuário!"
+            message: "Erro ao buscar o usuário!",
         });
     }
-}
+};
 
 async function createUser(req, res) {
     try {
@@ -51,7 +53,7 @@ async function createUser(req, res) {
     } catch (error) {
         console.error("Erro ao cadastrar o usuário: ", error);
         res.status(500).json({
-            message: "Erro ao cadastrar o usuário!"
+            message: "Erro ao cadastrar o usuário!",
         });
     }
 };
@@ -67,10 +69,10 @@ async function updateUser(req, res) {
     } catch (error) {
         console.error("Erro ao atualizar o usuário: ", error);
         res.status(500).json({
-            message: "Erro ao atualizar o usuário!"
+            message: "Erro ao atualizar o usuário!",
         });
     }
-}
+};
 
 async function deleteUser(req, res) {
     try {
@@ -83,10 +85,10 @@ async function deleteUser(req, res) {
     } catch (error) {
         console.error("Erro ao excluir o usuário: ", error);
         res.status(500).json({
-            message: "Erro ao excluir o usuário!"
+            message: "Erro ao excluir o usuário!",
         });
     }
-}
+};
 
 module.exports = {
     getAllUsers,
